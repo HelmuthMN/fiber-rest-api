@@ -1,0 +1,126 @@
+definitions:
+  Error:
+    properties:
+      message:
+        type: string
+    type: object
+  User:
+    properties:
+      created_at:
+        type: string
+      email:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      updated_at:
+        type: string
+    type: object
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: API de Teste GoFiber
+paths:
+  /v1/user/:
+    get:
+      consumes:
+      - application/json
+      description: Get the actual user.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: teste
+          schema:
+            $ref: '#/definitions/User'
+      summary: get the user
+      tags:
+      - User
+  /v1/user/login:
+    post:
+      consumes:
+      - application/json
+      description: Log the user in API
+      parameters:
+      - description: User
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: teste
+          schema:
+            $ref: '#/definitions/User'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Error'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Log the user
+      tags:
+      - Login
+  /v1/user/logout:
+    post:
+      consumes:
+      - application/json
+      description: Logout from api server
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/User'
+      summary: Logout from server
+      tags:
+      - Logout
+  /v1/user/register:
+    post:
+      consumes:
+      - application/json
+      description: Create a new user based on user model
+      parameters:
+      - description: User that will be registered
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Response if object is found
+          schema:
+            $ref: '#/definitions/User'
+        "500":
+          description: Response if object was not found
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Create a new user
+      tags:
+      - Register User
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
